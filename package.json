@@ -1,7 +1,7 @@
 {
   "name": "css-flexbox-cheatsheet",
-  "displayName": "CSS Flexbox Cheatsheet",
-  "description": "Open a flexbox cheatsheet directly in VS Code.",
+  "displayName": "CSS Cheatsheet",
+  "description": "Open a CSS cheatsheet directly in VS Code.",
   "version": "3.3.0",
   "engines": {
     "vscode": "^1.57.0"
@@ -16,20 +16,20 @@
   "contributes": {
     "keybindings": [
       {
-        "command": "flexbox.cheatsheet",
+        "command": "css.cheatsheet",
         "key": "Ctrl+K K",
         "mac": "Cmd+K K"
       }
     ],
     "commands": [
       {
-        "command": "flexbox.cheatsheet",
-        "title": "Open CSS Flexbox Cheatsheet"
+        "command": "css.cheatsheet",
+        "title": "Open CSS Cheatsheet"
       }
     ]
   },
   "activationEvents": [
-    "onCommand:flexbox.cheatsheet",
+    "onCommand:css.cheatsheet",
     "onLanguage:css",
     "onLanguage:less",
     "onLanguage:sass",

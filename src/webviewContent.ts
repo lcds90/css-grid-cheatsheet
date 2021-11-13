@@ -17,7 +17,7 @@ export function getWebviewContent(
 		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src ${cspSource}; style-src ${cspSource} '${webviewUiToolkitHash}'; img-src ${cspSource};">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>CSS Flexbox Cheatsheet</title>
+		<title>CSS Cheatsheet</title>
 		
 		<link rel="stylesheet" href="${stylePath}/custom.css">
 	</head>
@@ -478,7 +478,8 @@ export function getWebviewContent(
 		</main>
 
 		<script type="module" src="${scriptPath}/webview-ui-toolkit/toolkit.min.js"></script>
-		<script src="${scriptPath}/custom.js"></script>
+		<script src="${scriptPath}/flexbox.js"></script>
+		<script src="${scriptPath}/grid.js"></script>
 	</body>
 </html>
 `;

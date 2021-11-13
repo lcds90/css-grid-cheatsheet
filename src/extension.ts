@@ -3,7 +3,8 @@ import { join } from 'path';
 import { lstatSync } from 'fs';
 
 import { getWebviewContent } from './webviewContent';
-import * as flexboxPatterns from './flexboxPatterns';
+import * as flexboxPatterns from './patterns/flexboxPatterns';
+import * as gridPatterns from './patterns/gridPatterns';
 
 const supportedFiles = ['css', 'less', 'sass', 'scss'];
 
@@ -38,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   const disposableCommand = vscode.commands.registerCommand(
-    'flexbox.cheatsheet',
+    'css.cheatsheet',
     () => {
       const styleRoot = vscode.Uri.file(join(context.extensionPath, 'style'));
       const imagesRoot = vscode.Uri.file(join(context.extensionPath, 'images'));
@@ -46,8 +47,8 @@ export function activate(context: vscode.ExtensionContext) {
 
       // Create and show a new webview
       const panel = vscode.window.createWebviewPanel(
-        'flexboxCheatsheet',
-        'CSS Flexbox Cheatsheet',
+        'Cheatsheet',
+        'CSS Cheatsheet',
         vscode.ViewColumn.Beside,
         {
           localResourceRoots: [styleRoot, imagesRoot, scriptRoot],
@@ -130,26 +131,34 @@ function decorate(editor: vscode.TextEditor) {
   const sourceCodeArr = sourceCode.split('\n');
 
   for (let line = 0; line < sourceCodeArr.length; line++) {
-    const sourceCode = sourceCodeArr[line];
+    
+    const findMatches = (pattern: any, typeOfIndexName: string) => {
+      const sourceCode = sourceCodeArr[line];
+      let matches = matchAll(pattern, sourceCode);
 
-    let matches = matchAll(flexboxPatterns.displayFlexPattern, sourceCode);
+      if (matches.length > 0) {
+        matches.forEach((match) => {
+          if (match.index !== undefined) {
+            const typeOfIndex = sourceCode.indexOf(typeOfIndexName, match.index);
+  
+            let range = new vscode.Range(
+              new vscode.Position(line, match.index),
+              new vscode.Position(line, typeOfIndex)
+            );
+  
+            let decoration = { range };
+  
+            decorationsArray.push(decoration);
+          }
+        });
+      }
+    };
 
-    if (matches.length > 0) {
-      matches.forEach((match) => {
-        if (match.index !== undefined) {
-          const flexIndex = sourceCode.indexOf('flex', match.index);
+    findMatches(flexboxPatterns.displayFlexPattern, 'flex');
+    findMatches(gridPatterns.displayGridPattern, 'grid');
 
-          let range = new vscode.Range(
-            new vscode.Position(line, match.index),
-            new vscode.Position(line, flexIndex)
-          );
 
-          let decoration = { range };
-
-          decorationsArray.push(decoration);
-        }
-      });
-    }
+    
   }
 
   editor.setDecorations(decorationType, decorationsArray);
@@ -174,9 +183,9 @@ function buildMarkdownString(
 ): vscode.MarkdownString[] {
   let markdownString: vscode.MarkdownString[] = [];
 
-  const commandUri = vscode.Uri.parse('command:flexbox.cheatsheet');
+  const commandUri = vscode.Uri.parse('command:css.cheatsheet');
   const flexboxCommand = new vscode.MarkdownString(
-    `[Open CSS Flexbox Cheatsheet](${commandUri} "Open CSS Flexbox Cheatsheet")`
+    `[Open CSS Cheatsheet](${commandUri} "Open CSS Cheatsheet")`
   );
 
   // To enable command URIs in Markdown content, you must set the `isTrusted` flag.
@@ -207,7 +216,7 @@ function getPropertyRangeAtPosition(
 ) {
   let propertyRange: vscode.Range | undefined;
 
-  for (const pattern of flexboxPatterns.allFlexboxPatterns) {
+  for (const pattern of [...flexboxPatterns.allFlexboxPatterns, ...gridPatterns.allGridPatterns]) {
     const range = doc.getWordRangeAtPosition(pos, pattern);
 
     if (range) {
