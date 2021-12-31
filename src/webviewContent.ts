@@ -172,15 +172,26 @@ export function getWebviewContent(
 						<code class="js-directionality-code">dir="ltr"</code>
 					</div>
 
-					<div class="flexbox-container js-flexbox-container" dir="ltr">
-						<div>One</div>
-						<div>Two</div>
-						<div>Three</div>
-						<div>Four</div>
-						<div>Five</div>
-						<div>Six</div>
-						<div>Seven</div>
-						<div>Eight</div>
+					<h4>Try it out</h4>
+					<div class="interactive-playground flex-container">
+						<button class="button selected" data-js-class="flex-wrap-nowrap" type="button">nowrap</button>
+						<button class="button" data-js-class="flex-wrap-flex-wrap" type="button">wrap</button>
+						<button class="button" data-js-class="flex-wrap-wrap-reverse" type="button">wrap-reverse</button>
+
+						<div class="directionality align-right">
+							<code class="js-directionality-code">dir="ltr"</code>
+						</div>
+
+						<div class="flexbox-container js-flexbox-container" dir="ltr">
+							<div>One</div>
+							<div>Two</div>
+							<div>Three</div>
+							<div>Four</div>
+							<div>Five</div>
+							<div>Six</div>
+							<div>Seven</div>
+							<div>Eight</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -156,8 +156,6 @@ function decorate(editor: vscode.TextEditor) {
 
     findMatches(flexboxPatterns.displayFlexPattern, 'flex');
     findMatches(gridPatterns.displayGridPattern, 'grid');
-
-
     
   }
 
