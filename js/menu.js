@@ -4,6 +4,7 @@
   const nav = document.querySelector('.containerSummaryList');
   h1.textContent = 'CSS Cheatsheet';
   nav.style.overflowY = 'hidden';
+  const classname = 'containerSummaryList-on';
 
   select.addEventListener('click', ({ target: { value } }) => {
     document.querySelector(`#${value}`).scrollIntoView({
@@ -12,12 +13,12 @@
   });
 
   nav.addEventListener('mouseleave', () => {
-    nav.classList.remove('containerSummaryList-on');
+    nav.classList.remove(classname);
     h1.textContent = 'Select a section';
     nav.style.overflowY = 'hidden';
   });
   nav.addEventListener('click', () => {
-    nav.classList.add('containerSummaryList-on');
+    nav.classList.add(classname);
     h1.textContent = 'Welcome to CSS Cheatsheet';
     nav.style.overflowY = 'auto';
   });
