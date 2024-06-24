@@ -30,8 +30,8 @@ export function getWebviewContent(
   
 	  <nav class="containerSummaryList">
 		  <section>
-			  <h1 id="title"></h1>
-			 	<select id="menu">
+			  	<label for="menu"> Flexbox
+			 	<select id="menu" class="menu">
 				 	<optgroup label="Flex container">
 						<option value="flexDisplay">display</option>
 						<option value="flexShorthand">flex-flow</option>
@@ -46,6 +46,24 @@ export function getWebviewContent(
 				  		<option value="flexShorthand">Flex display</option>
 					</optgroup>
 				</select> 
+				</label>
+				<label for="menu"> Grid
+				<select class="menu">
+					<optgroup label="Flex container">
+					   <option value="flexDisplay">display</option>
+					   <option value="flexShorthand">flex-flow</option>
+					   <option value="flexDirection">flex-direction</option>
+					   <option value="flexWrap">flex-wrap</option>
+						 <option value="justifyContent">justify-content</option>
+						 <option value="alignItems">align-items</option>
+						 <option value="alignContent">align-content</option>
+				   </optgroup>
+				   <optgroup label="Flex item">
+						 <option value="flexDisplay">Flex display</option>
+						 <option value="flexShorthand">Flex display</option>
+				   </optgroup>
+			   </select> 
+			   </label>
 		  </section>
 		  <section>
 		  		<div class="container">
@@ -113,6 +131,11 @@ export function getWebviewContent(
 							  flex-wrap)</span>
 					  </div>
 				  </div>
+				  <div class="row">
+				  <div>flex-flow
+					  <span class="default">column wrap-reverse;</span>
+				  </div>
+			  </div>
 			  </div>
   
 			  <div class="group">
